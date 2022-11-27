@@ -45,4 +45,11 @@ public class UserService {
     public void logOutUser(String sessionId){
         sessionIdUsername.remove(sessionId);
     }
+
+    public String getLoggedUser(String sessionId) {
+        if (isUserLogged(sessionId) && sessionIdUsername.containsKey(sessionId) ) {
+            return sessionIdUsername.get(sessionId);
+        }
+        return "";
+    }
 }

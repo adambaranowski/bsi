@@ -35,8 +35,8 @@ public class LoginController {
     @GetMapping("/logout")
     @ResponseStatus(HttpStatus.OK)
     public void logoutUser(@RequestHeader Map<String, String> headers){
-        if(headers.containsKey("SessionId")){
-           userService.logOutUser(headers.get("SessionId"));
+        if(headers.containsKey("sessionid")){
+           userService.logOutUser(headers.get("sessionid"));
         }
     }
 }
