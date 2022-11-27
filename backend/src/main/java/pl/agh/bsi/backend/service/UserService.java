@@ -20,7 +20,7 @@ public class UserService {
     }
 
     public boolean isUserLogged(String sessionId){
-        return sessionIdUsername.contains(sessionId);
+        return sessionIdUsername.containsKey(sessionId);
     }
 
     public String logUser(String username, String password) throws CredentialException {
@@ -32,6 +32,7 @@ public class UserService {
 
         String sessionId = UUID.randomUUID().toString();
         sessionIdUsername.put(sessionId, username);
+        System.out.println(sessionId);
         return sessionId;
     }
 
