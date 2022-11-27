@@ -36,6 +36,12 @@ public class UserService {
         return sessionId;
     }
 
+    public String getUsernameForSessionId(String sessionId) {
+        String username = sessionIdUsername.get(sessionId);
+        // validate null?
+        return username;
+    }
+
     public void logOutUser(String sessionId){
         sessionIdUsername.remove(sessionId);
     }
