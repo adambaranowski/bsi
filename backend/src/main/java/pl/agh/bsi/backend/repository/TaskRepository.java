@@ -5,10 +5,7 @@ import org.springframework.stereotype.Repository;
 import pl.agh.bsi.backend.controller.dto.Task;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +14,7 @@ import java.util.List;
 public class TaskRepository {
 
     private static final String GET_USERS_TASKS_QUERY = "SELECT title, content FROM tasks WHERE owner='%s'";
+    private static final String ADD_TASK_QUERY = "INSERT INTO tasks (owner, title, content) VALUES ('%s', '%s', '%s')";
 
     private final DataSource dataSource;
 
@@ -32,11 +30,24 @@ public class TaskRepository {
                 Task task = new Task();
                 task.setTitle(resultSet.getString("title"));
                 task.setContent(resultSet.getString("content"));
+                taskList.add(task);
             }
             return taskList;
         } catch (SQLException ex) {
             System.out.println(ex);
         }
         return null;
+    }
+
+    public void addTaskByOwnerTitleContent(String owner, String title, String content) {
+        String sql = String.format(ADD_TASK_QUERY, owner, title, content);
+        try (
+                Connection conn = dataSource.getConnection();
+                Statement statement = conn.createStatement();
+        ) {
+            statement.execute(sql);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
 }

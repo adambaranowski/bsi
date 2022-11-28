@@ -13,8 +13,11 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
 
-
     public List<Task> getTasksByUser(String username) {
         return taskRepository.getTasksByOwner(username);
+    }
+
+    public void addTaskToUser(String owner, String title, String content) {
+        taskRepository.addTaskByOwnerTitleContent(owner, title, content);
     }
 }

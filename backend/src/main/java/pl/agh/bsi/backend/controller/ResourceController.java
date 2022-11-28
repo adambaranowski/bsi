@@ -3,10 +3,7 @@ package pl.agh.bsi.backend.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.agh.bsi.backend.controller.dto.Task;
 import pl.agh.bsi.backend.service.TaskService;
 import pl.agh.bsi.backend.service.UserService;
@@ -34,16 +31,29 @@ public class ResourceController {
     }
 
     @GetMapping("/tasks")
-    public ResponseEntity<Object> getUserTasks(@RequestHeader Map<String, String> headers){
+    public ResponseEntity<Object> getUserTasks(@RequestHeader Map<String, String> headers) {
         if(headers.containsKey("sessionid")){
-            List<Task> tasks = taskService.getTasksByUser(
-                    userService.getLoggedUser(headers.get("sessionid")));
+            String username = userService.getLoggedUser(headers.get("sessionid"));
+
+            List<Task> tasks = taskService.getTasksByUser(username);
 
             if (tasks.isEmpty()) {
                 return ResponseEntity.ok("You don't have any tasks");
             }
             return ResponseEntity.ok(tasks);
         }
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("YOU'RE NOT LOGGED IN");
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Wrong sessionId or you're not logged in.");
+    }
+
+    @GetMapping("/addTask")
+    public ResponseEntity<Object> addUserTask(@RequestHeader Map<String, String> headers,
+                                              @RequestParam String title,
+                                              @RequestParam String content) {
+        if(headers.containsKey("sessionid")){
+            String username = userService.getLoggedUser(headers.get("sessionid"));
+            taskService.addTaskToUser(username, title, content);
+            return ResponseEntity.ok("Task added.");
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Wrong sessionId or you're not logged in.");
     }
 }
