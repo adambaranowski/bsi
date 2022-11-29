@@ -57,11 +57,13 @@ function checkIfSessionActive() {
         document.getElementById("session-data").innerText = "Session token is: "+token;
         document.getElementById("login-btn").style.display='none';
         document.getElementById("logout-btn").style.display='block';
+        document.getElementById("tasks-btn").style.display='block';
     }
     else {
         document.getElementById("session-data").innerText = "Session token is not set.";
         document.getElementById("login-btn").style.display='block';
         document.getElementById("logout-btn").style.display='none';
+        document.getElementById("tasks-btn").style.display='none';
 
     }
 }
