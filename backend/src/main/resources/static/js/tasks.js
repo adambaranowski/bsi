@@ -21,3 +21,19 @@ async function getTasks() {
     table += '</tbody>';
     document.getElementById('tableData').innerHTML = table;
 }
+
+async function addTask() {
+    let token = sessionStorage.getItem("sessionId");
+    let title = document.getElementById("title").value;
+    let content = document.getElementById("content").value;
+
+    await fetch(`/resource/addTask?title=${title}&content=${content}`, {
+        method: "GET",
+        headers: {
+            'sessionId': token,
+        }
+    });
+
+    document.getElementById('id01').style.display='none'
+    await getTasks();
+}

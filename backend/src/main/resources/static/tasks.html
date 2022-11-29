@@ -21,15 +21,57 @@
 <body onload="getTasks()">
   <div id="auth-wrapper" class="auth-container">
     <h2 style="width: 50%; margin: auto; text-align: center">Twoje zadania</h2>
+    <div style="margin-top:2.5em; width: 100%; display: flex; flex-direction: row">
+      <button id="addTask-btn" onclick="document.getElementById('id01').style.display='block'" style="width:auto; margin: auto">Dodaj zadanie</button>
+    </div>
+    <div id="id01" class="modal">
+
+      <div class="form-container">
+        <!--        <form class="modal-content animate w-50 p-3 mx-auto" action="/login" method="get">-->
+        <!--        <form class="modal-content animate w-50 p-3 mx-auto">-->
+        <div class="form-replacement modal-content animate w-50 p-3 mx-auto">
+
+          <!--      <div class="imgcontainer">-->
+          <!--        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>-->
+          <!--        <img src="img_avatar2.png" alt="Avatar" class="avatar">-->
+          <!--      </div>-->
+
+          <div class="container">
+            <label for="title"><b>Tytuł</b></label>
+            <input type="text" placeholder="Enter title" name="title" id="title" required>
+
+            <label for="content"><b>Treść</b></label>
+            <input type="text" placeholder="Enter content" name="content" id="content" required>
+
+            <!--            <button type="submit">Login</button>-->
+
+            <div class="container" style="background-color:#f1f1f1; display: flex; flex-direction: row; justify-content: space-between">
+              <button onclick="addTask()">Dodaj zadanie</button>
+              <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+              <!--          <span class="psw">Forgot <a href="#">password?</a></span>-->
+            </div>
+          </div>
+
+
+          <!--        </form>-->
+        </div>
+
+      </div>
+    </div>
     <table id="tasks">
       <thead>
       <tr>
-        <th>Title</th>
-        <th>Content</th>
+        <th>Tytuł</th>
+        <th>Treść</th>
       </tr>
       </thead>
       <tbody id="tableData"></tbody>
     </table>
+
+    <div style="margin-top:2.5em; width: 100%; display: flex; flex-direction: row">
+      <button id="index-btn" onclick="location.href = 'index.html';" style="width:auto; margin: auto">Powrót</button>
+    </div>
+
   </div>
 
   <script src="js/tasks.js"></script>
