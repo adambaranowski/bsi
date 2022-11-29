@@ -15,7 +15,7 @@ public class TaskRepository {
 
     private static final String GET_USERS_TASKS_QUERY = "SELECT title, content FROM tasks WHERE owner='%s'";
     private static final String ADD_TASK_QUERY = "INSERT INTO tasks (owner, title, content) VALUES ('%s', '%s', '%s')";
-
+    private static final String TASK_BY_ID_QUERY = "SELECT title, content from tasks WHERE id='%d'";
     private final DataSource dataSource;
 
     public List<Task> getTasksByOwner(String owner){
@@ -33,6 +33,26 @@ public class TaskRepository {
                 taskList.add(task);
             }
             return taskList;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+    
+    public Task getTaskById(Integer id) {
+        String sql = String.format(TASK_BY_ID_QUERY, id);
+        try (
+                Connection conn = dataSource.getConnection();
+                PreparedStatement preparedStatement = conn.prepareStatement(sql);
+                ResultSet resultSet = preparedStatement.executeQuery()
+        ) {
+            Task task = null;
+            while (resultSet.next()) {
+                task = new Task();
+                task.setTitle(resultSet.getString("title"));
+                task.setContent(resultSet.getString("content"));
+            }
+            return task;
         } catch (SQLException ex) {
             System.out.println(ex);
         }

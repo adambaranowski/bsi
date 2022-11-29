@@ -45,6 +45,15 @@ public class ResourceController {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Wrong sessionId or you're not logged in.");
     }
 
+    @GetMapping("/tasks/{id}")
+    public ResponseEntity<Object> getUserTasks(@PathVariable Integer id) {
+        Task task = taskService.getTaskById(id);
+        if (task == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"detail\": \"task not found\"}");
+        }
+        return ResponseEntity.ok(task);
+    }
+
     @GetMapping("/addTask")
     public ResponseEntity<Object> addUserTask(@RequestHeader Map<String, String> headers,
                                               @RequestParam String title,

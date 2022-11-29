@@ -17,6 +17,10 @@ public class TaskService {
         return taskRepository.getTasksByOwner(username);
     }
 
+    public Task getTaskById(Integer id) {
+        return taskRepository.getTaskById(id);
+    }
+
     public void addTaskToUser(String owner, String title, String content) {
         taskRepository.addTaskByOwnerTitleContent(owner, title, content);
     }
