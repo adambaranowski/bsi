@@ -22,7 +22,7 @@
             integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
             crossorigin="anonymous"></script>
 </head>
-<body onload="checkIfSessionActive()">
+<body onload="checkIfSessionActive(); loadAboutInfo()">
 
 <div id="auth-wrapper" class="auth-container">
     <h2 style="width: 50%; margin: auto; text-align: center">Bezpieczenstwo Systemow Informatycznych</h2>
@@ -85,11 +85,13 @@
     <div style="width: 100%; display: flex; flex-direction: row">
         <button id="tasks-btn" onclick="location.href = 'tasks.html';" style="width:auto; margin: auto">Tasks</button>
     </div>
-      <div style="width: 100%; display: flex; flex-direction: row; margin-top: 20px">
-          <button id="malicious-btn" onclick="window.open('taskss.html','_blank')" style="width:auto; margin: auto">Tasks in new tab</button>
-      </div>
+    <div style="width: 100%; display: flex; flex-direction: row; margin-top: 20px">
+        <button id="malicious-btn" onclick="window.open('taskss.html','_blank')" style="width:auto; margin: auto">Tasks in new tab</button>
+    </div>
+    <div id="site-description">
+
+    </div>
   </div>
-</div>
 
 <script src="js/index.js"></script>
 </body>

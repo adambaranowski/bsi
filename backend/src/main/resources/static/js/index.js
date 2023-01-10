@@ -73,3 +73,11 @@ function checkIfSessionActive() {
         document.getElementById("malicious-btn").style.display='none';
     }
 }
+
+async function loadAboutInfo() {
+    const response = await fetch('/file/about', {
+        method: "GET",
+    });
+
+    document.getElementById("site-description").innerText = await response.text();
+}
