@@ -19,6 +19,11 @@ async function login() {
     document.getElementById('id01').style.display='none'
 }
 
+async function resetDatabase() {
+    const response = await fetch(`/config/reset`);
+    alert("App reset!");
+}
+
 async function logout() {
     let token = sessionStorage.getItem("sessionId");
     const response = await fetch('/logout', {

@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.agh.bsi.backend.controller.dto.Task;
+import pl.agh.bsi.backend.service.ConfigService;
 import pl.agh.bsi.backend.service.TaskService;
 import pl.agh.bsi.backend.service.UserService;
 

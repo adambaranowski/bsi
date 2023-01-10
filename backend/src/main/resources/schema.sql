@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
                        id   INTEGER      NOT NULL AUTO_INCREMENT,
                        username VARCHAR(128) NOT NULL,
                        password VARCHAR(128) NOT NULL,
@@ -6,7 +6,7 @@ CREATE TABLE users (
                        UNIQUE (username)
 );
 
-CREATE TABLE tasks (
+CREATE TABLE IF NOT EXISTS tasks (
                        id   INTEGER      NOT NULL AUTO_INCREMENT,
                        owner VARCHAR(128) NOT NULL,
                        title VARCHAR(128) NOT NULL,
